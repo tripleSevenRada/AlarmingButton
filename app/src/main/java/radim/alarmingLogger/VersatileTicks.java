@@ -26,7 +26,7 @@ public class VersatileTicks{
             try {
                 otl.onTickReceived();
             } finally {
-                // 100% guarantee that this always happens
+                // 100% guarantee that this always happens.
                 if(!killer) {
                     handler.postDelayed(ticks, intervalInMilis);
                 }
