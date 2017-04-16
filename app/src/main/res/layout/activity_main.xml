@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="0dp"
+
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    tools:context=".MainActivity">
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat" />
+
+    <GridView
+        android:id="@+id/gridview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grayOfButtons"
+        android:elevation="0dp"
+        android:gravity="center"
+        android:horizontalSpacing="2dp"
+        android:numColumns="1"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:verticalSpacing="2dp" />
+
+    <ScrollView
+        android:id="@+id/scrollParent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/scrollChild"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:id="@+id/linearLayoutRowOfStopWatch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:weightSum="100">
+
+                <TextView
+                    android:id="@+id/textViewStopWatch"
+                    style="@style/customTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="45"
+                    android:gravity="center"
+                    android:textSize="28dp" />
+
+
+                <LinearLayout
+                    android:id="@+id/linearLayoutLeftVertical"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="55"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textViewGPSProv"
+                        style="@style/customTextViewDP"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal" />
+
+                    <TextView
+                        android:id="@+id/textViewNETProv"
+                        style="@style/customTextViewDP"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayoutAboveSeekBarAndTextViewSeekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginBottom="2dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginTop="2dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textViewSeekBar"
+                    style="@style/customTextView"
+                    android:layout_marginTop="2dp" />
+
+                <SeekBar
+                    android:id="@+id/seekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="6dp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textViewPulseBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="22dp"
+                android:layout_marginTop="4dp"
+                android:gravity="left" />
+
+            <LinearLayout
+                android:id="@+id/linearLayoutUnderSeekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:id="@+id/linearLayoutLeftVerticalUnderSeekBar"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textViewLat"
+                        style="@style/customTextViewDP" />
+
+                    <TextView
+                        android:id="@+id/textViewLon"
+                        style="@style/customTextViewDP" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayoutRightVerticalUnderSeekBar"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textViewProvUsed"
+                        style="@style/customTextViewDP" />
+
+                    <TextView
+                        android:id="@+id/textViewAccur"
+                        style="@style/customTextViewDP" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <Button
+
+                    android:id="@+id/button1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:onClick="startJob"
+                    android:text="@string/start_job"
+                    android:textSize="20dp" />
+
+                <Button
+
+                    android:id="@+id/button2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:onClick="stopJob"
+                    android:text="@string/stop_job"
+                    android:textSize="20dp" />
+
+            </LinearLayout>
+
+            <ProgressBar
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/progressB"/>
+
+            <TextView
+                android:id="@+id/reportTV"
+                style="@style/customTextViewDP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/vertical_margin_above_textViewSmall"
+                android:gravity="center_horizontal"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/outputTV"
+                style="@style/customTextViewDP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/vertical_margin_above_textViewSmall"
+                android:gravity="center_horizontal"
+                android:textColor="@color/colorPrimary"
+                android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                android:textSize="14sp" />
+
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
