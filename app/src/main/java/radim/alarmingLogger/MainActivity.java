@@ -82,8 +82,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
     private boolean enabledNET = false;
     private int currentInterval;
 
-    //private int jobsId = 0;
-
     private StopWatchSimple sws;
     private VersatileTicks vt;
     private TextView tvStopWatch;
@@ -92,7 +90,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
     private TextView report;
     private TextView output;
 
-    //private BroadcastReceiver takeActionWhenDecided;
     private Export e;
 
     /**
@@ -101,9 +98,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
      *
      */
     @Override
-    protected void onNewIntent(Intent i) {
-        //toastThis("on new intent");
-    }
+    protected void onNewIntent(Intent i) {}
 
     /**
      *
@@ -232,9 +227,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         trackpointDao = daoSession.getTrackpointDao();
 
         String currentSession = OnRebootBroadcastListener.getSession(this.getApplication().getApplicationContext());
-        if ((!currentSession.equals(getSessionWhenStarted())) && getRunningStatus()) {                 // REBOOT WHILE RUNNING
+        if ((!currentSession.equals(getSessionWhenStarted())) && getRunningStatus()) {// REBOOT WHILE RUNNING
 
-            mJobScheduler = (JobScheduler)                                                             // in case persisted(false) does not work
+            mJobScheduler = (JobScheduler)                                            // in case persisted(false) does not work
                     getSystemService(Context.JOB_SCHEDULER_SERVICE);
             mJobScheduler.cancelAll();
 
@@ -410,11 +405,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         listAllPendingJobs();
         Log.e("DEBUG_JOBS","===============================================");
 
-//        takeActionWhenDecided = createBroadcastReceiver();
-//        LocalBroadcastManager.getInstance(this).registerReceiver(takeActionWhenDecided,
-//                new IntentFilter(LOCAL_BROADCAST_IDENTITY));
-
-
         putReporterToWarn();
         reportPermStatus();
 
@@ -468,13 +458,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         super.onPause();
 
         Log.i(TAG, "onPause");
-
-
-//        if (takeActionWhenDecided != null) {
-//            LocalBroadcastManager.getInstance(this).unregisterReceiver(takeActionWhenDecided);
-//            takeActionWhenDecided = null;
-//        }
-
 
         setInterval(currentInterval);
 
@@ -1146,11 +1129,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
 
         FragmentManager manager = getFragmentManager();
 
-        //Fragment frag = manager.findFragmentByTag("fragment_alert");
-        //if (frag != null) {
-        //  manager.beginTransaction().remove(frag).commit();
-        //}
-
         FragmentAlertDialog fad = new FragmentAlertDialog();
         fad.setArguments(handedIn);
         fad.show(manager, "fragment_warning");
@@ -1219,61 +1197,4 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         output.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
     }
 
-
-    /**
-     *
-     *
-     *
-     * @param title
-     * @param message
-     * @param it
-     * @param type
-     */
-//    private void doDecisionAlert(
-//
-//            String title,
-//            String message,
-//            ESeverityIcon it,
-//            String type
-//    ) {
-//
-//        Bundle handedIn = new Bundle();
-//
-//        handedIn.putString("title", title);
-//        handedIn.putString("message", message);
-//        handedIn.putString("severity", it.toString());
-//        handedIn.putString("type", type);
-//
-//        FragmentManager manager = getFragmentManager();
-//
-//        MyAlertDialog fad = new MyAlertDialog();
-//        fad.setCancelable(false);
-//        fad.setArguments(handedIn);
-//        fad.show(manager, "fragment_info");
-//
-//    }
-
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-//    private BroadcastReceiver createBroadcastReceiver() {
-//        return new BroadcastReceiver() {
-//            @Override
-//            public void onReceive(Context context, Intent intent) {
-//
-//                if (intent.getStringExtra("message").equals(POSITIVE_BUTTON_SETTINGS)) {
-//
-//                }
-//
-//                if (intent.getStringExtra("message").equals(NEUTRAL_BUTTON)) {
-//
-//                }
-//                //default action
-//            }
-//        };
-//    }
 }

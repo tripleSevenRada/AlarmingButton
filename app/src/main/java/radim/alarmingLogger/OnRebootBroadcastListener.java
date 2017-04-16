@@ -42,8 +42,6 @@ public class OnRebootBroadcastListener extends BroadcastReceiver {
 
         Log.i(TAG, "_______!!_______OnRebootListener onReceive context " + context.toString());
 
-        //Toast.makeText(context,context.toString(),Toast.LENGTH_LONG).show();
-
         Calendar cal = Calendar.getInstance();
         Date d = cal.getTime();
         String session = d.toString();

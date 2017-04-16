@@ -138,7 +138,7 @@ class Export implements IPermConstants {
                         bw.write(t.getAsXmlLine());
                         bw.newLine();
 
-                        /** For every 10 th increment, sent a message to UI thread to increment the progressbar */
+                        /* For every 10 th increment, sent a message to UI thread to increment the progressbar */
                         if (count % 10 == 0)
                             mHandler.post(new Runnable() {
                                 @Override
@@ -192,24 +192,6 @@ class Export implements IPermConstants {
         });
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //================================= ALTERNATIVE ==========================================
 //========================================================================================

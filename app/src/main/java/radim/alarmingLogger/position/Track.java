@@ -104,14 +104,10 @@ public class Track extends AppCompatActivity {
     public double getAvgSpeed() {
 
         long start = prefs.getLong("first_known_time", 0l);
-        //Log.e("DBG_AVG","start "+start);
         long last = prefs.getLong("last_known_time", 0l);
-        //Log.e("DBG_AVG","last "+last);
         long delta = last - start;
-        //Log.e("DBG_AVG","delta "+delta);
         if (delta == 0l) return 0l;
         double hours = ((double) delta) / 1000 / 60 / 60;
-        //Log.e("DBG_AVG","hours "+hours);
 
         return getLength() / hours;
 

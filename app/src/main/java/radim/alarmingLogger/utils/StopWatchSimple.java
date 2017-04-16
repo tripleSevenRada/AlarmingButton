@@ -63,7 +63,6 @@ public class StopWatchSimple implements IOnTickListener{
 
         if(sec<10) secsS = "0"+String.valueOf(sec);else secsS = String.valueOf(sec);
 
-        //return String.valueOf(elapsedSec);
         return hoursS+":"+minsS+":"+secsS;
     }
     /**

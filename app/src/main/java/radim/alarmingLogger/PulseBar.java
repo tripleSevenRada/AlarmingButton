@@ -18,8 +18,6 @@ public class PulseBar implements IOnTickListener{
     private int interval = 600;
     private VersatileTicks vt;
 
-    //private static final String TAG = "Logger:PB";
-
     private int roller = 0;
 
     public PulseBar(TextView tv, char ch, int length){

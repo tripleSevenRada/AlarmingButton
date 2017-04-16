@@ -39,7 +39,7 @@ public class StatGridPopulation implements IOnTickListener {
     }
 
     @Override
-    public void onTickReceived() {//this method does get called from main thread
+    public void onTickReceived() {//does get called from main thread
 
         myStringArray[0] = mContext.getResources().getString(R.string.stat1)+w+String.valueOf(track.getTrackSize());
         myStringArray[1] = mContext.getResources().getString(R.string.stat2)+w+formatter.format(track.getLength())+w+mContext.getResources().getString(R.string.km);

@@ -64,10 +64,6 @@ public class Trackpoint extends Location implements IConstants {
     @Transient
     private StringBuilder sb = new StringBuilder();
 
-    //private double lat;//all locations created by LocationManager include valid lat
-    //private double lon;//all locations created by LocationManager include valid lon
-    //private float accur;//all locations created by LocationManager include accuracy
-
     @Transient
     private Context c = null;
 
@@ -151,11 +147,6 @@ public class Trackpoint extends Location implements IConstants {
         super.setElapsedRealtimeNanos(elapsedRealTimeNanos);
 
     }
-
-
-
-    //@@@@@@@if(!myPreferences.contains("default_alt")){setDefAlt(DEF_ALT);}
-    //@@@@@@@if(!myPreferences.contains("last_known_alt")){setLastKnownAlt(DEF_ALT);}
 
     /**
      *
@@ -294,13 +285,13 @@ public class Trackpoint extends Location implements IConstants {
      */
     public String getAsXmlLine() {
 
-        return "<trkpt lat=\"" + f6.format(getLatitude()) + "\" lon=\"" + f6.format(getLongitude()) +
+        return "<trkpt lat=\"" + f8.format(getLatitude()) + "\" lon=\"" + f8.format(getLongitude()) +
                 "\">\n<ele>" + f2.format(getAltitude()) + "</ele>\n<time>"+getTimeStamp()+"</time>\n</trkpt>";
 
     }
 
     @Transient
-    private NumberFormat f6 = new DecimalFormat("#0.00000000");
+    private NumberFormat f8 = new DecimalFormat("#0.00000000");
     @Transient
     private NumberFormat f2 = new DecimalFormat("#0.00");
 
