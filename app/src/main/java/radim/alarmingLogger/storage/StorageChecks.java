@@ -2,10 +2,6 @@ package radim.alarmingLogger.storage;
 
 import android.os.Environment;
 
-/**
- * Created by radim on 23.11.16.
- */
-
 public class StorageChecks {
 
     /* Checks if external storage is available for read and write */
