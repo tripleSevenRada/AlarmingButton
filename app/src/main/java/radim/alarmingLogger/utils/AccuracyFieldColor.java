@@ -2,9 +2,6 @@ package radim.alarmingLogger.utils;
 
 import android.graphics.Color;
 
-/**
- * Created by radim on 8.9.16.
- */
 public final class AccuracyFieldColor {
 
     private AccuracyFieldColor(){}
@@ -24,6 +21,5 @@ public final class AccuracyFieldColor {
         }
         return Color.rgb(red,green,0);
     }
-
 
 }
