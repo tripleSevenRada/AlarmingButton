@@ -13,6 +13,8 @@ public interface IgpsConstants {
     int HOW_LONG_TO_TRY = 60;
     int HOW_LONG_TO_RECORD = 26;
 
+    long MIN_INTERVAL_BETWEEN_ADDING_TRACKPOINT = 6000;
+
     float ACCURACY_TO_BREAK_RECORDING = 26.0f;
     float ACCURACY_ABOVE_DO_NOT_ADD = 600.0f;
 }

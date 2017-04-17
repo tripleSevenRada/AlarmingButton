@@ -92,6 +92,8 @@ public final class MyJobService extends JobService implements LocationListener, 
     public boolean onStartJob(JobParameters params) {
 
         if (lm == null) return false;
+        long delta = System.currentTimeMillis() - prefs.getLong("last_known_add",0);
+        if (delta < MIN_INTERVAL_BETWEEN_ADDING_TRACKPOINT) return false;
 
         this.fjp = params;
 
@@ -297,12 +299,14 @@ public final class MyJobService extends JobService implements LocationListener, 
                 if (best != null && best.getAccuracy() < ACCURACY_ABOVE_DO_NOT_ADD) {
 
                     track.addTrackpoint(best);
+                    edit.putLong("last_known_add", System.currentTimeMillis());
+                    edit.commit();
 
                     if (prefs.getString("tripName", "").equals(getString(R.string.defTripName))) {
 
                         TripName tn = new TripName();
                         edit.putString("tripName", tn.getTripName());
-                        edit.apply();
+                        edit.commit();
 
                     }
 

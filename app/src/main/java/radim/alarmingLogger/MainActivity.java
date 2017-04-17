@@ -164,9 +164,13 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
             myEditor.putString("tripName", getString(R.string.defTripName));
             myEditor.putInt("starts", 0);
             myEditor.putInt("id", 0);
+
+            //min interval between adding trackpoint
+            myEditor.putLong("last_known_add", 0);
+
             myEditor.putBoolean("firstTime", true);
 
-            myEditor.commit();
+            myEditor.apply();
         }
 
 
