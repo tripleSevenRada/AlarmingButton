@@ -4,9 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-
 import java.util.List;
-
 import radim.alarmingLogger.R;
 
 public class Track extends AppCompatActivity {
@@ -18,7 +16,6 @@ public class Track extends AppCompatActivity {
     private final Context c;
 
     /**
-     *
      *
      */
     public Track(TrackpointDao tDao, Context c) {
@@ -68,7 +65,6 @@ public class Track extends AppCompatActivity {
             //-----------------------------------------------------
 
             myEditor.putLong("last_id", t.getId());
-
             myEditor.commit();
 
         }
@@ -82,9 +78,11 @@ public class Track extends AppCompatActivity {
     }
 
     public void reset() {
+        
         synchronized (trackpointDao) {
             trackpointDao.deleteAll();
         }
+        
         myEditor.putFloat("length", 0f);
         myEditor.putLong("last_known_time", 0l);
         myEditor.putLong("first_known_time", 0l);
@@ -96,9 +94,11 @@ public class Track extends AppCompatActivity {
     }
 
     public int getTrackSize() {
+        
         synchronized (trackpointDao) {
             return (int) trackpointDao.count();
         }
+        
     }
 
     public double getAvgSpeed() {
@@ -108,7 +108,6 @@ public class Track extends AppCompatActivity {
         long delta = last - start;
         if (delta == 0l) return 0l;
         double hours = ((double) delta) / 1000 / 60 / 60;
-
         return getLength() / hours;
 
     }
@@ -116,14 +115,13 @@ public class Track extends AppCompatActivity {
     public double getLength() {
 
         float length = prefs.getFloat("length", 0f);
-
         return (double) length / 1000;
+        
     }
 
     public double getMaxAltitude() {
 
         float max = prefs.getFloat("max_alt", 0f);
-
         return (double) max;
 
     }
