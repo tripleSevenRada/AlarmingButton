@@ -6,17 +6,14 @@ import android.location.Location;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
-
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Keep;
 import org.greenrobot.greendao.annotation.Property;
 import org.greenrobot.greendao.annotation.Transient;
-
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-
 import radim.alarmingLogger.IConstants;
 import org.greenrobot.greendao.annotation.Generated;
 
@@ -40,7 +37,6 @@ public class Trackpoint extends Location implements IConstants {
     @Transient
     private static final String NAME_OF_PROVIDER = "GPSLoggerApp";
 
-
     //##############################################################
     //##############################################################
     //##############################################################
@@ -61,6 +57,7 @@ public class Trackpoint extends Location implements IConstants {
     //##############################################################
     //##############################################################
     //##############################################################
+    
     @Transient
     private StringBuilder sb = new StringBuilder();
 
@@ -275,11 +272,6 @@ public class Trackpoint extends Location implements IConstants {
         this.timestamp = timestamp;
     }
     /**
-     *
-     *
-     *
-     *
-     *
      *
      * @return String representing trackpoint as xml entity
      */
