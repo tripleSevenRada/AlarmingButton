@@ -1,8 +1,5 @@
 package radim.alarmingLogger;
 
-/**
- * Created by radim on 1.9.16.
- */
 public interface IgpsConstants {
     int LOCATION_UPDATES_REQ_GPS = 512;
     int LOCATION_UPDATES_REQ_NET = 1024;

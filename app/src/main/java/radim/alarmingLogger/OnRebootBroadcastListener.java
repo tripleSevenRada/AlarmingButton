@@ -7,11 +7,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
-
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
 
 public class OnRebootBroadcastListener extends BroadcastReceiver {
 
@@ -55,12 +53,7 @@ public class OnRebootBroadcastListener extends BroadcastReceiver {
 
     public static String getSession(Context context) {
 
-        //Log.i(TAG, "_______!!_______OnRebootListener getSession context "+context.toString());
-
         sp = context.getSharedPreferences("myPreferencesOnReboot", Context.MODE_PRIVATE);
-
-        //Log.i(TAG, "_______!!_______OnRebootListener getSession sp "+sp.toString());
-
         String session = sp.getString("session", UNDEF);
         Log.i(TAG, "session returned from OnRebootBroadcastListener " + session);
 

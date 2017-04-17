@@ -1,9 +1,5 @@
 package radim.alarmingLogger.utils;
 
-/**
- * Created by radim on 17.9.16.
- */
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -13,7 +9,7 @@ import radim.alarmingLogger.R;
 
 public class FragmentAlertDialog extends DialogFragment {
 
-    public FragmentAlertDialog (){}//default constructor only
+    public FragmentAlertDialog (){}
     private String title="title";
     private String message="warning message";
     private String ok = "OK";

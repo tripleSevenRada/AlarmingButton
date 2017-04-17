@@ -3,16 +3,11 @@ package radim.alarmingLogger;
 import android.content.Context;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
-
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-
 import radim.alarmingLogger.position.Track;
 import radim.alarmingLogger.position.TrackpointDao;
 
-/**
- * Created by radim on 10.9.16.
- */
 public class StatGridPopulation implements IOnTickListener {
 
     private GridView v;
@@ -20,9 +15,7 @@ public class StatGridPopulation implements IOnTickListener {
     private String w;
     private Context mContext;
     //private static final String TAG="Logger:MA";
-
     private Track track;
-
     private final NumberFormat formatter;
 
     public StatGridPopulation(Context mContext, GridView v, TrackpointDao t){

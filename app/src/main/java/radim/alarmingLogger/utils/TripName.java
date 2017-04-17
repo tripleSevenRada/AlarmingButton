@@ -5,10 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-/**
- * Created by radim on 20.1.17.
- */
-
 public class TripName {
 
     public String getTripName(){

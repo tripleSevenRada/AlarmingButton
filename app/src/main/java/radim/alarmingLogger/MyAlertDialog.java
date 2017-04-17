@@ -1,6 +1,5 @@
 package radim.alarmingLogger;
 
-
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
@@ -11,7 +10,6 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.text.Html;
 import android.widget.Button;
 
-
 public class MyAlertDialog extends DialogFragment implements IAlertDialogTypes, ILocalBroadcastConstants {
 
     private String title = "TITLE";
@@ -19,9 +17,7 @@ public class MyAlertDialog extends DialogFragment implements IAlertDialogTypes, 
     private String severity = "INFO"; //INFO,WARNING,ERROR
     private String type = DEFAULT;
 
-
-    public MyAlertDialog() {
-    } //default constructor only
+    public MyAlertDialog() {}
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -75,7 +71,6 @@ public class MyAlertDialog extends DialogFragment implements IAlertDialogTypes, 
             return d;
         }
 
-
         return new android.app.AlertDialog.Builder(getActivity()) //DEFAULT
                 .setIcon(icon)
                 .setTitle("default object")
@@ -104,7 +99,5 @@ public class MyAlertDialog extends DialogFragment implements IAlertDialogTypes, 
                 b.setTextColor(ContextCompat.getColor(getActivity(), R.color.colorPrimary));
             }
         });
-
     }
-
 }

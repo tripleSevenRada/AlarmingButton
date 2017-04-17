@@ -3,13 +3,9 @@ package radim.alarmingLogger;
 import android.os.Handler;
 import android.util.Log;
 import android.widget.TextView;
-
 import java.util.Timer;
 import java.util.TimerTask;
 
-/**
- * Created by radim on 4.9.16.
- */
 public class PulseBar implements IOnTickListener{
 
     private TextView tv;

@@ -11,12 +11,6 @@ import radim.alarmingLogger.R;
 import radim.alarmingLogger.position.Track;
 import radim.alarmingLogger.position.TrackpointDao;
 
-
-/**
- * Created by radim on 14.9.16.
- */
-
-
 public class Notif {
 
     private Context myContext;
@@ -58,9 +52,7 @@ public class Notif {
 
         NotificationManager mNotifyMgr =
                 (NotificationManager) myContext.getSystemService(Context.NOTIFICATION_SERVICE);
-        //n.flags |= Notification.FLAG_AUTO_CANCEL;
 
-        // Builds the notification and issues it.
         mNotifyMgr.notify(0, n);
     }
 }

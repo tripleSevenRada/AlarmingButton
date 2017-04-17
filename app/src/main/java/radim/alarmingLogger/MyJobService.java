@@ -85,7 +85,6 @@ public final class MyJobService extends JobService implements LocationListener, 
             handleSE(se);
         }
 
-
     }
 
     @Override

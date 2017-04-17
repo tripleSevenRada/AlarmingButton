@@ -6,16 +6,13 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.List;
-
 import radim.alarmingLogger.position.Trackpoint;
-
 import static radim.alarmingLogger.IConstants.APP_DIR;
 
 class Export implements IPermConstants {
@@ -193,7 +190,7 @@ class Export implements IPermConstants {
 
     }
 
-//================================= ALTERNATIVE ==========================================
+//===================================== ALTERNATIVE ======================================
 //========================================================================================
 //========================================================================================
 //========================================================================================

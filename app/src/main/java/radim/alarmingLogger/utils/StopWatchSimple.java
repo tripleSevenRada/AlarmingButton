@@ -6,9 +6,6 @@ import android.widget.TextView;
 import java.util.Calendar;
 import radim.alarmingLogger.IOnTickListener;
 
-/**
- * Created by radim on 9.9.16.
- */
 public class StopWatchSimple implements IOnTickListener{
 
     private long timeItStarted;

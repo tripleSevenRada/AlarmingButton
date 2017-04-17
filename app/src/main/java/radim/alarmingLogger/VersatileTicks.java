@@ -3,10 +3,6 @@ package radim.alarmingLogger;
 import android.os.Handler;
 import android.util.Log;
 
-/**
- * Created by radim on 9.9.16.
- */
-
 public class VersatileTicks{
 
     private IOnTickListener otl;
@@ -32,7 +28,6 @@ public class VersatileTicks{
                 }
             }
         }
-
     };
 
     public void startTicks(){

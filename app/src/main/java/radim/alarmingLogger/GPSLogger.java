@@ -5,10 +5,6 @@ import org.greenrobot.greendao.database.Database;
 import radim.alarmingLogger.position.DaoMaster;
 import radim.alarmingLogger.position.DaoSession;
 
-/**
- * Created by radim on 16.1.17.
- */
-
 public class GPSLogger extends Application {
     /** A flag to show how easily you can switch from standard SQLite to the encrypted SQLCipher. */
     public static final boolean ENCRYPTED = false;

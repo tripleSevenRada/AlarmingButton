@@ -1,6 +1,5 @@
 package radim.alarmingLogger;
 
-
 import android.Manifest;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -35,12 +34,10 @@ import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.io.File;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
-
 import radim.alarmingLogger.position.DaoSession;
 import radim.alarmingLogger.position.Track;
 import radim.alarmingLogger.position.Trackpoint;
@@ -331,7 +328,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
                 }
             }
         });
-
 
         sgp = new StatGridPopulation(this, gv, trackpointDao);
         sgp.onTickReceived();
@@ -809,7 +805,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
             return;
         }
 
-
         StorageChecks sch = new StorageChecks();
         boolean possible = sch.isExternalStorageWritable();
 
@@ -825,14 +820,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
             return;
         }
 
-        //mock
-//        List<Trackpoint> mock = new ArrayList<>();
-//        for(int i = 0; i < 10000; i++) {
-//            Trackpoint t = new Trackpoint(1l, 14.33, 50.55, 345.0, 45.55f, 234444l);
-//            mock.add(t);
-//        }
-        //track.getTrack();
-
         List<Trackpoint> data = track.getTrack();
 
         e = new Export(data, myPreferences.getString("tripName",
@@ -842,14 +829,11 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
 
         e.doWriteExportFile();
 
-        //poolForResult.run();
-
         //export
 
         //###############################################################
         //###############################################################
         //###############################################################
-
 
     }
 
@@ -1034,8 +1018,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
     @Override
     public void onLocationChanged(Location location) {
 
-        //currentLocation = location;
-
         currentLocation = new Location(location);
 
         setLocationTVs(currentLocation);
@@ -1064,9 +1046,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         disableOrEnableButtonsAndIndicators();
     }
 
-
     /**
-     *
      *
      */
     private void setLocationTVs(Location location) {
@@ -1160,7 +1140,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
                 == PackageManager.PERMISSION_GRANTED);
     }
 
-
     private void clearOutputTv() {
         output.setText("");
     }
@@ -1183,7 +1162,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         report.setText(reporter);
 
     }
-
 
     //REPORTER
 
