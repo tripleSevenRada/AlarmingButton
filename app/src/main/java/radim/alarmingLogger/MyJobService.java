@@ -31,8 +31,8 @@ public final class MyJobService extends JobService implements LocationListener, 
 
     private static final String TAG = "Logger:MJOBSER";
     private static boolean play = true;
-    private volatile LocationManager lm = null;
     private final Object locationGuard = new Object();
+    private volatile LocationManager lm = null;
     private volatile Location currentLocation;//worker thread reads
     private volatile Context myContext;
     private volatile Set<Trackpoint> candidates;
@@ -179,7 +179,6 @@ public final class MyJobService extends JobService implements LocationListener, 
 
     /**
      *
-     *
      */
     private void handleSE(Exception e) {
         Log.e(TAG, "SECURITY EXCEPTION IN MY JOB SERVICE");
@@ -214,13 +213,6 @@ public final class MyJobService extends JobService implements LocationListener, 
     }
 
     /**
-     *
-     *
-     *
-     *
-     *
-     *
-     *
      *
      */
     private final class AsyncLocationListener extends AsyncTask<Void, Void, Void> {
