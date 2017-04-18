@@ -1,2 +1,2 @@
 # GPS-logger
-Yet another android GPS Logger. Battery efficient one. Has some trade-offs though.
+Yet another Android GPS Logger. Battery efficient one! It has some trade-offs though.
