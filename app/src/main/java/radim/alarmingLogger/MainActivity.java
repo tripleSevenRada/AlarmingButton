@@ -38,6 +38,10 @@ import java.io.File;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+
+import radim.alarmingLogger.logging.LogEntry;
+import radim.alarmingLogger.logging.LogEntryDao;
+import radim.alarmingLogger.logging.LogToFile;
 import radim.alarmingLogger.position.DaoSession;
 import radim.alarmingLogger.position.Track;
 import radim.alarmingLogger.position.Trackpoint;
@@ -83,6 +87,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
     private VersatileTicks vt;
     private TextView tvStopWatch;
     private TrackpointDao trackpointDao;
+    private LogEntryDao logEntryDao;
+
+    private LogToFile logging;
 
     private TextView report;
     private TextView output;
@@ -226,6 +233,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
 
         DaoSession daoSession = ((GPSLogger) getApplication()).getDaoSession();
         trackpointDao = daoSession.getTrackpointDao();
+        logEntryDao = daoSession.getLogEntryDao();
+        logging = new LogToFile(logEntryDao);
 
         String currentSession = OnRebootBroadcastListener.getSession(this.getApplication().getApplicationContext());
         if ((!currentSession.equals(getSessionWhenStarted())) && getRunningStatus()) {// REBOOT WHILE RUNNING
@@ -240,8 +249,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
 
                 int id = info.getId();
 
-                Log.wtf("JOB_AFTER_REBOOT", info.toString());
-                Log.e("JOB_AFTER_REBOOT", info.toString());
+                String message = "JOB_AFTER_REBOOT" + info.toString();
+                Log.wtf("JOB_AFTER_REBOOT", message);
+
+                logging.addEntry(new LogEntry(message));
 
                 mJobScheduler.cancel(id);
 
@@ -349,7 +360,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
                                           public void onStopTrackingTouch(SeekBar seekBar) {
 
                                               if (getRunningStatus()) scheduleOrRescheduleJob();
-                                              Log.i("DEBUG", "ON SEEKBAR " + currentInterval);
+                                              //Log.i("DEBUG", "ON SEEKBAR " + currentInterval);
 
                                           }
                                       }
@@ -550,6 +561,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         setSessionWhenStarted(OnRebootBroadcastListener.getSession(this.getApplication().getApplicationContext()));
 
         track.reset();
+        logging.reset();
 
         toastThis(getString(R.string.statusRunning));
 
@@ -567,6 +579,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         }
 
         Log.i(TAG, "startJob");
+        logging.addEntry(new LogEntry("__startJob from MA"));
 
         scheduleOrRescheduleJob();
 
@@ -767,6 +780,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         }
 
         Log.i(TAG, "stopJob");
+        logging.addEntry(new LogEntry("__stopJob from MA"));
 
         Log.i(TAG, "__________LISTING ALL PENDING JOBS FROM STOP JOB BEFORE cancelAll");
         listAllPendingJobs();
@@ -821,8 +835,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         }
 
         List<Trackpoint> data = track.getTrack();
+        List<LogEntry> log = logging.getLog();
 
-        e = new Export(data, myPreferences.getString("tripName",
+        e = new Export(data, log, myPreferences.getString("tripName",
                 getString(R.string.defTripName)), this, progress);
 
         startB.setEnabled(false);

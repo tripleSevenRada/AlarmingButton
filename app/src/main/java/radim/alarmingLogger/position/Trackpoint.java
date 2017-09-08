@@ -191,6 +191,14 @@ public class Trackpoint extends Location implements IConstants {
      *
      * @return
      */
+    public String inLineString(){
+        return "TRKPT " + getLongitude() + " " + getLatitude() + " ALT " +getAltitude() + " ACCUR " + getAccuracy();
+    }
+
+    /**
+     *
+     * @return
+     */
     public double getLatitude() {
         return super.getLatitude();
     }

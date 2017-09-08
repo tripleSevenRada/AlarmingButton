@@ -15,6 +15,9 @@ import android.util.Log;
 import java.util.HashSet;
 import java.util.Set;
 
+import radim.alarmingLogger.logging.LogEntry;
+import radim.alarmingLogger.logging.LogEntryDao;
+import radim.alarmingLogger.logging.LogToFile;
 import radim.alarmingLogger.position.DaoSession;
 import radim.alarmingLogger.position.Track;
 import radim.alarmingLogger.position.Trackpoint;
@@ -39,6 +42,8 @@ public final class MyJobService extends JobService implements LocationListener, 
     private JobParameters fjp;
     private volatile TrackpointDao trackpointDao;
     private volatile Track track;
+    private volatile LogEntryDao logEntryDao;
+    private volatile LogToFile logging;
     private volatile SharedPreferences prefs;
     private volatile SharedPreferences.Editor edit;
 
@@ -66,6 +71,9 @@ public final class MyJobService extends JobService implements LocationListener, 
         DaoSession daoSession = ((GPSLogger) getApplication()).getDaoSession();
         trackpointDao = daoSession.getTrackpointDao();
         track = new Track(trackpointDao, myContext);
+        logEntryDao = daoSession.getLogEntryDao();
+        logging = new LogToFile(logEntryDao);
+        logging.addEntry(new LogEntry("_____MyJobService_onCreate"));
 
         lm = (LocationManager) getSystemService(LOCATION_SERVICE);
 
@@ -76,10 +84,12 @@ public final class MyJobService extends JobService implements LocationListener, 
             if (lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
                 lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, LOCATION_UPDATES_REQ_GPS_JOBSER, 2, this);
                 Log.i(TAG, "lm is providerEnabled GPS");
+                logging.addEntry(new LogEntry("lm is providerEnabled GPS"));
             }
             if (lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
                 lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, LOCATION_UPDATES_REQ_NET_JOBSER, 2, this);
                 Log.i(TAG, "lm is providerEnabled NET");
+                logging.addEntry(new LogEntry("lm is providerEnabled NET"));
             }
         } catch (SecurityException se) {
             handleSE(se);
@@ -97,6 +107,7 @@ public final class MyJobService extends JobService implements LocationListener, 
         this.fjp = params;
 
         Log.i(TAG, "onStartJob");
+        logging.addEntry(new LogEntry("_____onStartJob from MyJobService"));
         Log.e("paramsON_START_JOB", fjp.toString());
         Log.e("paramsON_START_JOB", params.toString());
         Log.e("paramsID_ON_START_JOB", String.valueOf(params.getJobId()));
@@ -121,7 +132,7 @@ public final class MyJobService extends JobService implements LocationListener, 
     public boolean onStopJob(JobParameters params) {
 
         Log.i(TAG, "onStopJob");
-
+        logging.addEntry(new LogEntry("_____onStopJob from MyJobService"));
         if (lm == null) return false;
 
         doStopIt();
@@ -140,7 +151,7 @@ public final class MyJobService extends JobService implements LocationListener, 
     }
 
     private void doStopIt() {
-
+        logging.addEntry(new LogEntry("_____doStopIt from MyJobService"));
         if (lm == null) return;
 
         try {
@@ -191,7 +202,7 @@ public final class MyJobService extends JobService implements LocationListener, 
 
     @Override
     public void onLocationChanged(Location location) {
-        Log.v(TAG, "--------location changed");
+        //Log.v(TAG, "--------location changed");
 
         setCurrentLocation(new Location(location));
 
@@ -199,17 +210,23 @@ public final class MyJobService extends JobService implements LocationListener, 
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
-        Log.i(TAG, "------------------------ON STATUS CHANGED provider: " + provider + " STATUS " + status);
+        String message = "___ON STATUS CHANGED provider: " + provider + " STATUS " + status;
+        Log.i(TAG, message);
+        logging.addEntry(new LogEntry(message));
     }
 
     @Override
     public void onProviderEnabled(String provider) {
-        Log.i(TAG, "------------------------PROVIDER ENABLED " + provider);
+        String message = "___PROVIDER ENABLED " + provider;
+        Log.i(TAG, message);
+        logging.addEntry(new LogEntry(message));
     }
 
     @Override
     public void onProviderDisabled(String provider) {
-        Log.i(TAG, "------------------------PROVIDER DISABLED " + provider);
+        String message = "___PROVIDER DISABLED " + provider;
+        Log.i(TAG, message);
+        logging.addEntry(new LogEntry(message));
     }
 
     /**
@@ -267,7 +284,10 @@ public final class MyJobService extends JobService implements LocationListener, 
                     if (getCurrentLocation() != null) {
                         Trackpoint t = new Trackpoint(getCurrentLocation(), myContext);
                         candidates.add(t);
-                        if (t.getAccuracy() < ACCURACY_TO_BREAK_RECORDING) break;
+                        if (t.getAccuracy() < ACCURACY_TO_BREAK_RECORDING) {
+                            logging.addEntry(new LogEntry("(t.getAccuracy() < ACCURACY_TO_BREAK_RECORDING) >> BREAK"));
+                            break;
+                        }
                     }
                     try {
                         Thread.sleep(1000);
@@ -284,12 +304,20 @@ public final class MyJobService extends JobService implements LocationListener, 
                     mp1 = null;
                 }
 
-                Log.i(TAG, "candidates size " + candidates.size());
+                String candSize = "candidates size " + candidates.size();
+                Log.i(TAG, candSize);
+                logging.addEntry(new LogEntry(candSize));
 
                 Trackpoint best = getBestCandidate(candidates);
+
+                if(best == null) logging.addEntry(new LogEntry("trackpoint BEST = NULL"));
+                else if(best.getAccuracy() < ACCURACY_ABOVE_DO_NOT_ADD)
+                    logging.addEntry(new LogEntry("best.getAccuracy() < ACCURACY_ABOVE_DO_NOT_ADD"));
+
                 if (best != null && best.getAccuracy() < ACCURACY_ABOVE_DO_NOT_ADD) {
 
                     track.addTrackpoint(best);
+                    logging.addEntry(new LogEntry("adding " + best.inLineString()));
                     edit.putLong("last_known_add", System.currentTimeMillis());
                     edit.commit();
 
@@ -301,7 +329,10 @@ public final class MyJobService extends JobService implements LocationListener, 
 
                     }
 
-                } else Log.i(TAG, "no best candidate...\n");
+                } else {
+                    Log.i(TAG, "no best candidate...\n");
+                    logging.addEntry(new LogEntry("no best candidate..."));
+                }
 
             } finally {
 

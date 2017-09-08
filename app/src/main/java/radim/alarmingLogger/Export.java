@@ -12,6 +12,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.List;
+
+import radim.alarmingLogger.logging.LogEntry;
 import radim.alarmingLogger.position.Trackpoint;
 import static radim.alarmingLogger.IConstants.APP_DIR;
 
@@ -19,14 +21,16 @@ class Export implements IPermConstants {
 
     private static final String TAG = "EXPORT";
     private final List<Trackpoint> data;
+    private final List<LogEntry> logEntries;
     private final String name;
     private final MainActivity activity;
     private volatile ProgressBar progress;
 
     //--------------------------------------------
 
-    Export(List<Trackpoint> data, String name, MainActivity activity, ProgressBar progress) {
+    Export(List<Trackpoint> data, List<LogEntry> logEntries, String name, MainActivity activity, ProgressBar progress) {
         this.data = data;
+        this.logEntries = logEntries;
         this.name = name;
         this.activity = activity;
         this.progress = progress;
@@ -76,6 +80,7 @@ class Export implements IPermConstants {
     }
 
     private volatile File trip;
+    private volatile File logRecord;
 
     //_____________________________________________
     private final Handler mHandler = new Handler();
@@ -110,6 +115,7 @@ class Export implements IPermConstants {
                     if (!dir.exists()) postExecute(-1);
 
                     trip = new File(dir, name + ".gpx");
+                    logRecord = new File(dir, name + "_LOG.log");
 
                     FileOutputStream fos = new FileOutputStream(trip);
                     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
@@ -158,6 +164,19 @@ class Export implements IPermConstants {
 
                     bw.flush();
                     bw.close();
+                    fos.close();
+
+                    fos = new FileOutputStream(logRecord);
+                    bw = new BufferedWriter(new OutputStreamWriter(fos));
+
+                    for(LogEntry le : logEntries){
+                        bw.write(le.toString());
+                        bw.newLine();
+                    }
+
+                    bw.flush();
+                    bw.close();
+                    fos.close();
 
                 } catch (Exception e) {
                     postExecute(-1);
