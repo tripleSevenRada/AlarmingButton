@@ -107,7 +107,7 @@ public final class MyJobService extends JobService implements LocationListener, 
         this.fjp = params;
 
         Log.i(TAG, "onStartJob");
-        logging.addEntry(new LogEntry("_____onStartJob from MyJobService"));
+        logging.addEntry(new LogEntry("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX onStartJob from MyJobService"));
         Log.e("paramsON_START_JOB", fjp.toString());
         Log.e("paramsON_START_JOB", params.toString());
         Log.e("paramsID_ON_START_JOB", String.valueOf(params.getJobId()));
