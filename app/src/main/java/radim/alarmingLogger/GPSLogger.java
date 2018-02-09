@@ -2,8 +2,10 @@ package radim.alarmingLogger;
 
 import android.app.Application;
 import org.greenrobot.greendao.database.Database;
-import radim.alarmingLogger.position.DaoMaster;
-import radim.alarmingLogger.position.DaoSession;
+
+import radim.alarmingLogger.logging.DaoMaster;
+import radim.alarmingLogger.logging.DaoSession;
+
 
 public class GPSLogger extends Application {
     /** A flag to show how easily you can switch from standard SQLite to the encrypted SQLCipher. */

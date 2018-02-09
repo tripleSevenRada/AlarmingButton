@@ -42,7 +42,7 @@ import java.util.Locale;
 import radim.alarmingLogger.logging.LogEntry;
 import radim.alarmingLogger.logging.LogEntryDao;
 import radim.alarmingLogger.logging.LogToFile;
-import radim.alarmingLogger.position.DaoSession;
+import radim.alarmingLogger.logging.DaoSession;
 import radim.alarmingLogger.position.Track;
 import radim.alarmingLogger.position.Trackpoint;
 import radim.alarmingLogger.position.TrackpointDao;
@@ -631,10 +631,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         builder.setPersisted(false);                      //PERSISTED
         //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-        builder.setPeriodic( (long) ((currentInterval * 60 * 1000)*0.7) ); //MINUTES
+        builder.setPeriodic( (long) ((currentInterval * 60 * 1000)*1) ); //MINUTES
         //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-        if (mJobScheduler.schedule(builder.build()) <= 0) {
+        if (mJobScheduler.schedule(builder.build()) == JobScheduler.RESULT_FAILURE) {
 
             //If something goes wrong
             doWarningAlert("ScheduleOrRescheduleJob", "problem return value <= 0", "OK");

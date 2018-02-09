@@ -16,11 +16,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 import radim.alarmingLogger.logging.LogEntry;
+
 import radim.alarmingLogger.logging.LogEntryDao;
 import radim.alarmingLogger.logging.LogToFile;
-import radim.alarmingLogger.position.DaoSession;
+import radim.alarmingLogger.logging.DaoSession;
 import radim.alarmingLogger.position.Track;
 import radim.alarmingLogger.position.Trackpoint;
+
 import radim.alarmingLogger.position.TrackpointDao;
 import radim.alarmingLogger.utils.Notif;
 import radim.alarmingLogger.utils.TripName;
